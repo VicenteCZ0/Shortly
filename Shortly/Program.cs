@@ -59,4 +59,13 @@ using (var scope = app.Services.CreateScope())
     log.LogDebug("Initializing ok.");
 }
 
+app.MapGet("/{shortUrl}", async (string shortUrl, ILinkService linkService) =>
+{
+    var link = await linkService.GetLink(shortUrl);
+    if (link == null) return Results.NotFound("Enlace no encontrado.");
+
+    await linkService.IncrementClicks(link.Id);
+    return Results.Redirect(link.Url);
+});
+
 app.Run();
