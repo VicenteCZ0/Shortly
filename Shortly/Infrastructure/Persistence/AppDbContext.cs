@@ -8,8 +8,9 @@ namespace Shortly.Infrastructure.Persistence;
 /// </summary>
 public class AppDbContext : DbContext
 {
-    [cite_start]public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { } [cite: 605]
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<User> Users { get; set; } = null!; [cite: 624]
-    public DbSet<Link> Links { get; set; } = null!; [cite: 627]
+    public DbSet<User> Users { get; set; } = null!;
+    
+    public DbSet<Link> Links { get; set; } = null!;
 }

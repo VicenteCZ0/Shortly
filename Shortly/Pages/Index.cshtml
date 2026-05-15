@@ -1,10 +1,65 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Acortador de Enlaces";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Shortly</h1>
+        <p class="lead">Acorta tus enlaces de forma rápida y sencilla.</p>
+    </div>
+
+    <div class="card shadow-sm mb-5">
+        <div class="card-body">
+            <form method="post" class="row g-3">
+                <div class="col-md-9">
+                    <input type="url" asp-for="InputUrl" class="form-control" placeholder="Pega tu enlace largo aquí (http://...)" required>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">Acortar URL</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">Tus Enlaces</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>URL Original</th>
+                        <th>URL Acortada</th>
+                        <th class="text-center">Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Links.Any())
+                    {
+                        @foreach (var link in Model.Links)
+                        {
+                            <tr>
+                                <td class="text-truncate" style="max-width: 300px;">@link.Url</td>
+                                <td>
+                                    <a href="/@link.ShortUrl" target="_blank" class="text-decoration-none fw-bold">localhost:5117/@link.ShortUrl</a>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-secondary">@link.Clicks</span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center text-muted py-4">Aún no has acortado ningún enlace.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
