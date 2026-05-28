@@ -56,4 +56,22 @@ public sealed class UserService : IUserService
         _logger.LogInformation("Retrieved {Count} users from the database.", users.Count);
         return users;
     }
+
+    public async Task<User?> Login(string email, string password)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
+        {
+            _logger.LogWarning("Login failed for email: {Email}", email);
+            return null;
+        }
+
+        _logger.LogInformation("Login successful for email: {Email}", email);
+        return user;
+    }
+
+    public async Task<User?> GetUserByEmail(string email)
+    {
+        return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
+    }
 }

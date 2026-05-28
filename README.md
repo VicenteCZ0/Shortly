@@ -40,7 +40,10 @@ cd Shortly-1/Shortly
 dotnet run
 ```
 
-Al iniciar por primera vez, la app siembra un usuario administrador y datos de ejemplo. Abre `https://localhost:{puerto}` en el navegador.
+Al iniciar por primera vez, la app siembra un usuario administrador. Abre `http://localhost:5117/Login` en el navegador e inicia sesión con:
+
+- **Email:** `admin@shortly.com`
+- **Contraseña:** `123456`
 
 ## Cómo funciona
 

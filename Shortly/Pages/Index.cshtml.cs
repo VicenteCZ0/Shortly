@@ -23,21 +23,34 @@ public class IndexModel : PageModel
     [BindProperty]
     public string InputUrl { get; set; } = string.Empty;
 
-    public async Task OnGetAsync()
+    public string UserEmail => HttpContext.Session.GetString("user") ?? string.Empty;
+
+    public async Task<IActionResult> OnGetAsync()
     {
-        // Al cargar la página, traemos todos los links
+        if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            return RedirectToPage("/Login");
+
         Links = await _linkService.GetAllLinks();
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
+        if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            return RedirectToPage("/Login");
+
         if (!string.IsNullOrWhiteSpace(InputUrl))
         {
-            // Usamos el ID 1 (el admin que sembramos) para simplificar
             await _linkService.CreateLink(InputUrl, 1);
             _logger.LogInformation("Nueva URL acortada: {Url}", InputUrl);
         }
 
         return RedirectToPage();
+    }
+
+    public IActionResult OnPostLogout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToPage("/Login");
     }
 }
