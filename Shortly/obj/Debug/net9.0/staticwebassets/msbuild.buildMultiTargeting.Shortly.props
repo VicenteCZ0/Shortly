@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Shortly.props" />
-</Project>

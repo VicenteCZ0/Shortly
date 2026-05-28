@@ -1,0 +1,17 @@
+# Build output
+bin/
+obj/
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# VS / Rider
+.vs/
+*.user
+*.lscache
+
+# OS
+.DS_Store
+Thumbs.db
