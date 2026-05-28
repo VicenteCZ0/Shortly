@@ -5,9 +5,17 @@
 }
 
 <div class="container mt-5">
-    <div class="text-center mb-5">
-        <h1 class="display-4">Shortly</h1>
-        <p class="lead">Acorta tus enlaces de forma rápida y sencilla.</p>
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="display-4 mb-0">Shortly</h1>
+            <p class="lead mb-0">Acorta tus enlaces de forma rápida y sencilla.</p>
+        </div>
+        <div class="text-end">
+            <small class="text-muted d-block">@Model.UserEmail</small>
+            <form method="post" asp-page-handler="Logout" class="d-inline">
+                <button type="submit" class="btn btn-outline-secondary btn-sm mt-1">Cerrar sesión</button>
+            </form>
+        </div>
     </div>
 
     <div class="card shadow-sm mb-5">

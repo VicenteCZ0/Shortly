@@ -16,4 +16,14 @@ public interface IUserService
     /// Retrieves a list of all registered users in the system.
     /// </summary>
     Task<List<User>> GetAllUsers();
+
+    /// <summary>
+    /// Authenticates a user by email and password. Returns null if credentials are invalid.
+    /// </summary>
+    Task<User?> Login(string email, string password);
+
+    /// <summary>
+    /// Retrieves a user by their email address. Returns null if not found.
+    /// </summary>
+    Task<User?> GetUserByEmail(string email);
 }

@@ -1,0 +1,37 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Shortly</h1>
+        <p class="lead">Inicia sesión para continuar.</p>
+    </div>
+
+    <div class="card shadow-sm" style="max-width: 450px; margin: 0 auto;">
+        <div class="card-body">
+            @if (Model.SuccessMessage != null)
+            {
+                <div class="alert alert-success">@Model.SuccessMessage</div>
+            }
+            @if (Model.ErrorMessage != null)
+            {
+                <div class="alert alert-danger">@Model.ErrorMessage</div>
+            }
+
+            <form method="post" class="row g-3">
+                <div class="col-12">
+                    <input type="email" asp-for="Email" class="form-control" placeholder="Correo electrónico" required>
+                </div>
+                <div class="col-12">
+                    <input type="password" asp-for="Password" class="form-control" placeholder="Contraseña" required>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
